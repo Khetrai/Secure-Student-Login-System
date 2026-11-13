@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head><title>Audit Log</title></head>
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f1f5f9;
+        color: #1e293b;
+        margin: 0;
+        padding: 30px;
+    }
+
+    h1, h2, h3 {
+        color: #1e3a5f;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    a {
+        color: #3157a4;
+        text-decoration: none;
+        margin: 8px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    form, .container, .card {
+        background: white;
+        max-width: 750px;
+        margin: 25px auto;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0 15px;
+        border: 1px solid #cbd5e1;
+        border-radius: 7px;
+    }
+
+    button {
+        background: #3157a4;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1e3a70;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 13px;
+        border: 1px solid #e2e8f0;
+        text-align: left;
+    }
+
+    th {
+        background: #3157a4;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background: #f8fafc;
+    }
+</style>
+
+
+<body>
+  <h2>Audit Log</h2>
+
+  {% if ok %}
+    <p style="color:green"><b>Log integrity: OK (no tampering detected)</b></p>
+  {% else %}
+    <p style="color:red"><b>WARNING: Log tampering detected at entry #{{ bad_id }}</b></p>
+  {% endif %}
+
+  <table border="1" cellpadding="6">
+    <tr><th>#</th><th>Time</th><th>User</th><th>Action</th><th>Details</th><th>IP</th></tr>
+    {% for r in rows %}
+      <tr>
+        <td>{{ r.id }}</td><td>{{ r.created_at }}</td><td>{{ r.username or '-' }}</td>
+        <td>{{ r.action }}</td><td>{{ r.details }}</td><td>{{ r.ip }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <br><a href="/dashboard">Back to dashboard</a>
+</body>
+</html>

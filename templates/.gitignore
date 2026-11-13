@@ -1,0 +1,11 @@
+venv/
+.env
+records.db
+records.db.before_restore_*
+backups/
+qr.png
+__pycache__/
+*.pyc
+tamper_test.py
+fix_student.py
+reset_password.py

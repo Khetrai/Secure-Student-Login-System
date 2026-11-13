@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Portal</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        h2, h3 {
+            color: #1e3a5f;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        input[type="number"] {
+            width: 100px;
+        }
+
+        input[type="text"] {
+            width: 250px;
+        }
+
+        button {
+            background: #3157a4;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #3157a4;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h2>Teacher Portal</h2>
+
+    {% with messages = get_flashed_messages() %}
+        {% for m in messages %}
+            <p><b>{{ m }}</b></p>
+        {% endfor %}
+    {% endwith %}
+
+    <h3>Bulk Marks Entry</h3>
+
+    <form method="POST">
+
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <label>Course Name:</label><br><br>
+
+        <input type="text"
+               name="course"
+               maxlength="50"
+               placeholder="Enter course name"
+               required>
+
+        <table>
+            <tr>
+                <th>Roll No</th>
+                <th>Student Name</th>
+                <th>Marks (0-100)</th>
+            </tr>
+
+            {% for s in students %}
+            <tr>
+                <td>{{ s.roll_no }}</td>
+                <td>{{ s.name }}</td>
+                <td>
+                    <input type="number"
+                           name="marks_{{ s.id }}"
+                           min="0"
+                           max="100"
+                           placeholder="Marks">
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <button type="submit">Save All Marks</button>
+
+    </form>
+
+    <h3>All Saved Marks</h3>
+
+    <table>
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Marks</th>
+            <th>Updated</th>
+        </tr>
+
+        {% for r in records %}
+        <tr>
+            <td>{{ r.roll_no }}</td>
+            <td>{{ r.name }}</td>
+            <td>{{ r.course }}</td>
+            <td>{{ r.marks }}</td>
+            <td>{{ r.updated_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/dashboard">Back to Dashboard</a>
+
+</div>
+</body>
+</html>

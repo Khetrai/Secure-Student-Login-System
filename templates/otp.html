@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f1f5f9;
+        color: #1e293b;
+        margin: 0;
+        padding: 30px;
+    }
+
+    h1, h2, h3 {
+        color: #1e3a5f;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    a {
+        color: #3157a4;
+        text-decoration: none;
+        margin: 8px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    form, .container, .card {
+        background: white;
+        max-width: 750px;
+        margin: 25px auto;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0 15px;
+        border: 1px solid #cbd5e1;
+        border-radius: 7px;
+    }
+
+    button {
+        background: #3157a4;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1e3a70;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 13px;
+        border: 1px solid #e2e8f0;
+        text-align: left;
+    }
+
+    th {
+        background: #3157a4;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background: #f8fafc;
+    }
+</style>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="logo-icon">SSR</div>
+
+        <h1>Verify Your Identity</h1>
+
+        <p class="auth-subtitle">
+            Enter the 6-digit code from your authenticator app.
+        </p>
+
+        {% with messages = get_flashed_messages() %}
+            {% for m in messages %}
+                <div class="error-message">{{ m }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <input type="hidden"
+                   name="csrf_token"
+                   value="{{ csrf_token() }}">
+
+            <label>Authentication Code</label>
+
+            <input type="text"
+                   name="code"
+                   maxlength="6"
+                   minlength="6"
+                   pattern="[0-9]{6}"
+                   inputmode="numeric"
+                   placeholder="000000"
+                   autocomplete="one-time-code"
+                   required
+                   autofocus>
+
+            <button type="submit" class="login-btn">
+                Verify Code
+            </button>
+
+        </form>
+
+        <a href="/login" class="back-link">
+            Back to Login
+        </a>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+          <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #eef2ff;
+        margin: 0;
+        padding: 30px;
+    }
+
+    h1, h2 {
+        color: #243b64;
+        text-align: center;
+    }
+
+    form {
+        background: white;
+        max-width: 400px;
+        margin: 30px auto;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border-radius: 7px;
+    }
+
+    input {
+        border: 1px solid #ccc;
+    }
+
+    button {
+        background: #3157a4;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #203d7b;
+    }
+</style>
+</head>
+
+<body class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="logo-icon"></div>
+
+        <h1>Welcome Back</h1>
+
+        <p class="auth-subtitle">
+            Secure Student Records Management System
+        </p>
+
+        {% with messages = get_flashed_messages() %}
+            {% for m in messages %}
+                <div class="error-message">{{ m }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <input type="hidden"
+                   name="csrf_token"
+                   value="{{ csrf_token() }}">
+
+            <label>Username</label>
+
+            <input type="text"
+                   name="username"
+                   placeholder="Enter your username"
+                   autocomplete="username"
+                   required>
+
+            <label>Password</label>
+
+            <input type="password"
+                   name="password"
+                   placeholder="Enter your password"
+                   autocomplete="current-password"
+                   required>
+
+            <button type="submit" class="login-btn">
+                Login to Account
+            </button>
+
+        </form>
+
+        <p class="auth-footer">
+            Protected with Two-Factor Authentication
+        </p>
+
+    </div>
+
+</body>
+</html>

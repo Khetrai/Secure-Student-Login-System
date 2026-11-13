@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f1f5f9;
+        color: #1e293b;
+        margin: 0;
+        padding: 30px;
+    }
+
+    h1, h2, h3 {
+        color: #1e3a5f;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    a {
+        color: #3157a4;
+        text-decoration: none;
+        margin: 8px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    form, .container, .card {
+        background: white;
+        max-width: 750px;
+        margin: 25px auto;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0 15px;
+        border: 1px solid #cbd5e1;
+        border-radius: 7px;
+    }
+
+    button {
+        background: #3157a4;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1e3a70;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 13px;
+        border: 1px solid #e2e8f0;
+        text-align: left;
+    }
+
+    th {
+        background: #3157a4;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background: #f8fafc;
+    }
+</style>
+s
+</head>
+
+<body class="portal-body">
+
+    <div class="portal-container">
+
+        <div class="topbar">
+            <h2>Secure Student Records</h2>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+
+        <div class="welcome-card">
+            <span class="small-heading">ADMINISTRATION</span>
+            <h1>{{ title }}</h1>
+            <p>{{ message }}</p>
+
+            <div class="admin-actions">
+                <a href="/audit" class="main-btn">View Audit Logs</a>
+                <a href="/dashboard" class="secondary-btn">
+                    Back to Dashboard
+                </a>
+            </div>
+        </div>
+
+        <p class="footer-text">
+            Secure Student Records Management System
+        </p>
+
+    </div>
+
+</body>
+</html>

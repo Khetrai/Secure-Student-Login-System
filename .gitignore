@@ -1,0 +1,9 @@
+.env
+*.db
+backups/
+venv/
+.venv/
+__pycache__/
+*.pyc
+app.py.backup
+requirements_backup.txt
